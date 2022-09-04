@@ -72,7 +72,17 @@ body {
   font-size: 60px;
 }
 
-#answers{}
+#answers{
+  
+}
+
+#submissions{
+
+}
+
+#inputDetails{
+
+}
 
 .answerButtons{
   position: relative;
