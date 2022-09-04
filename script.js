@@ -157,12 +157,6 @@ const questionsArray = [
   },
 ];
 
-function randomQuestion(){
-    for(var i = 0; i <= questionsArray.length; i++){
-        Math.floor(Math.random(questionsArray[i]) * questionsArray.length)
-    }
-    content.innerText = questionsArray.randomQuestion()
-}
 
 // // each time an answer is put in, change question
 function randomQuestion(){
@@ -175,7 +169,6 @@ function randomQuestion(){
      for(var i = 0; i <= questionsArray.length; i++){
          Math.floor(Math.random(questionsArray[i]) * questionsArray.length);
         } 
-     
      if(questionFind == questionsArray[0]){
          buttonA.textContent = answer1.text1;
          buttonB.textContent = answer1.text2;
@@ -241,9 +234,11 @@ var wrongAnswer = 0;
 buttonA.addEventListener("click", function(event){
     event.preventDefault();
     if (buttonA == true){
+        // if the answer is correct, add 1 to correct
         correctAns++;
         randomQuestion();
     } else {
+        // if the answer is wrong, add 1 to wrong, take 5 seconds from the clock
         wrongAnswer++;
         randomQuestion();
     }
@@ -282,45 +277,44 @@ buttonD.addEventListener("click", function(event){
     }
 });
 
-// if the answer is correct, add 1 to correct
-// if the answer is wrong, add 1 to wrong, take 5 seconds from the clock
-
-
 // game over
 // when timer is 0, game is over
 // when game over, run submission page
 function postQuizPage(event){
-    event.preventDefault();
+    // event.preventDefault();
     buttonA.style.visibility = 'hidden';
     buttonB.style.visibility = 'hidden';
     buttonC.style.visibility = 'hidden';
     buttonD.style.visibility = 'hidden';
     userDetails.style.visibility = 'visible';
     saveButton.style.visibility = 'visible';
-    content.textContent = "Well done! you achieved " + correctAns + "/10";
-    submission.textContent = "What are your initials?";
-    saveButton.eventListener("click", function(event){
-        event.preventDefault();
-
-        var userHighScores = {
-            Initials: submission.value,
-            Score: correctAns,
-        };
-
-        localStorage.setItem("userHighScores", JSON.stringify(userHighScores));
-        viewHighscores();
-    });
+    saveButton.textContent = "Submit";
+    // input initials and score
+    // into submission page
+    // present the score /10
+    content.textContent = "Well done! You achieved " + correctAns + "/10";
+    userDetails.textContent = "What are your initials?";
+    // supply an Initials input
     
 };
-// input initials and score
-// into submission page
-// supply an Initials input
-// present the score /10
-// once details are submitted
-// save data to local, run Highscores page
+
+saveButton.addEventListener("click", function(event){
+    event.preventDefault();
+
+    var userHighScores = {
+        Initials: submission.value,
+        Score: correctAns,
+    };
+    // once details are submitted
+    // save data to local, run Highscores page
+    localStorage.setItem("userHighScores", JSON.stringify(userHighScores));
+    viewHighscores();
+
+});
 
 // viewighscores
-
+// shown once game is finished
+// shown by clicking View High Scores button
 viewHighScores.addEventListener("click", viewHighscores());
 
 function viewHighscores() {
@@ -330,17 +324,20 @@ function viewHighscores() {
     buttonD.style.visibility = 'hidden';
     userDetails.style.visibility = 'hidden';
     saveButton.style.visibility = 'hidden';
-    if(savedDetails === null){
+    // shows top 5 scores
+    // show initials and the score /10
+    var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
+    answerGrid.textContent = storedScores.Initials + storedScores.Score +"/10";
+    // include start button
+    initialButton.style.visibility = 'visible';
+    initialButton.textContent = "Restart Quiz"
+    if(storedScores === null){
         prompt("You must play the quiz to get a highscore!");
         return;
     };
-    
-    var savedDetails = JSON.parse(localStorage.getItem("userHighScores"));
-    answerGrid.textContent = savedDetails.Initials + savedDetails.Score +"/10";
+   
 
 };
-// shown once game is finished
-// shown by clicking View High Scores button
-// shows top 5 scores
-// show initials and the score /10
-// include start button
+
+
+
