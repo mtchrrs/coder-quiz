@@ -41,7 +41,9 @@ body {
   float: left;
 }  
 
-#viewHighscores{}
+#viewHighscores{
+  
+}
 
 #timeLeft{
   font-size: 25px;
@@ -60,11 +62,11 @@ body {
   margin-top: 150px;
   padding: 10px 70px;
   position: relative;
-  height: 380px;
+  height: 600px;
   text-align: center;
 }
 
-#questions{
+#main-title{
   text-align: center;
   font-style: bold;
   margin-top: 10px;
@@ -72,13 +74,34 @@ body {
   font-size: 60px;
 }
 
+#content{
+  text-align: center;
+  font-style: bold;
+  margin-top: 10px;
+  margin-bottom:20px;
+  font-size: 40px;
+}
+
 #answers{
   
+}
+
+.submitspage{
+  list-style: none;
+}
+
+.question-choices{
+  list-style: none;
 }
 
 #submissions{
 
 }
+
+.highscore-count{
+  list-style: none;
+}
+
 
 #inputDetails{
 

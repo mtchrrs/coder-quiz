@@ -1,7 +1,7 @@
 var viewHighScores = document.getElementById("viewHighscores");
 var timeLeft = document.getElementById("timeLeft");
 var mainPage = document.getElementById("mainPage");
-var content = document.getElementById("questions");
+var title = document.getElementById("main-title");
 var initialButton = document.getElementById("initialButton");
 var answerGrid = document.getElementById("answers");
 var buttonA = document.getElementById("buttonA");
@@ -10,6 +10,10 @@ var buttonC = document.getElementById("buttonC");
 var buttonD = document.getElementById("buttonD");
 var userDetails = document.getElementById("inputDetails");
 var saveButton = document.getElementById("saveButton");
+var submissionsPage = document.getElementById("submissions");
+var highScoreList = document.getElementById("list-highscores");
+var content = document.getElementById("content");
+var detailsLabel = document.getElementById("initials-label");
 
 init();
 
@@ -18,12 +22,29 @@ function init() {
     buttonB.style.visibility = 'hidden';
     buttonC.style.visibility = 'hidden';
     buttonD.style.visibility = 'hidden';
+    highScoreList.style.visibility = 'hidden';
+    submissionsPage.style.visibility = 'hidden';
     userDetails.style.visibility = 'hidden';
     saveButton.style.visibility = 'hidden';
+    content.style.visibility = 'hidden';
 };
 
+function gameReset(){
+    buttonA.style.visibility = 'hidden';
+    buttonB.style.visibility = 'hidden';
+    buttonC.style.visibility = 'hidden';
+    buttonD.style.visibility = 'hidden';
+    highScoreList.style.visibility = 'hidden';
+    submissionsPage.style.visibility = 'hidden';
+    answerGrid.style.visibility = 'hidden';
+    userDetails.style.visibility = 'hidden';
+    saveButton.style.visibility = 'hidden';
+    content.style.visibility = 'hidden';
+    initialButton.style.visibility = 'visible';
+}
+
 // start button
-initialButton.addEventListener("click", function(event) {
+initialButton.addEventListener("click", function startQuiz(event) {
     event.preventDefault();
     // when I click the button... quiz starts
     // timer starts counting down
@@ -34,6 +55,8 @@ initialButton.addEventListener("click", function(event) {
     // disappears until viewhighscore page is shown
     initialButton.style.visibility = 'hidden';
 });
+
+
 
 var secondsLeft = 30;
 
@@ -160,10 +183,13 @@ const questionsArray = [
 
 // // each time an answer is put in, change question
 function randomQuestion(){
+    title.style.visibility = 'hidden';
+    answerGrid.style.visability = 'hidden';
     buttonA.style.visibility = 'visible';
     buttonB.style.visibility = 'visible';
     buttonC.style.visibility = 'visible';
     buttonD.style.visibility = 'visible';
+    content.style.visibility = 'visible';
    
    var questionFind = function() {
      for(var i = 0; i <= questionsArray.length; i++){
@@ -286,14 +312,17 @@ function postQuizPage(event){
     buttonB.style.visibility = 'hidden';
     buttonC.style.visibility = 'hidden';
     buttonD.style.visibility = 'hidden';
+    answerGrid.style.visibility = 'hidden';
     userDetails.style.visibility = 'visible';
     saveButton.style.visibility = 'visible';
+    detailsLabel.style.visibility = 'hidden';
+    title.style.visibility = 'visible';
     saveButton.textContent = "Submit";
     // input initials and score
     // into submission page
     // present the score /10
-    content.textContent = "Well done! You achieved " + correctAns + "/10";
-    userDetails.textContent = "What are your initials?";
+    title.textContent = "Well done! You achieved " + correctAns + "/10";
+    content.textContent = "What are your initials?";
     // supply an Initials input
     
 };
@@ -302,7 +331,7 @@ saveButton.addEventListener("click", function(event){
     event.preventDefault();
 
     var userHighScores = {
-        Initials: submission.value,
+        Initials: userDetails.value,
         Score: correctAns,
     };
     // once details are submitted
@@ -322,15 +351,19 @@ function viewHighscores() {
     buttonB.style.visibility = 'hidden';
     buttonC.style.visibility = 'hidden';
     buttonD.style.visibility = 'hidden';
+    answerGrid.style.visibility = 'visible';
     userDetails.style.visibility = 'hidden';
     saveButton.style.visibility = 'hidden';
+    content.style.visibility = 'hidden';
     // shows top 5 scores
+    title.textContent = "High Scores Page"
     // show initials and the score /10
     var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
-    answerGrid.textContent = storedScores.Initials + storedScores.Score +"/10";
+    answerGrid.textContent = storedScores.Initials + " scored " + storedScores.Score +"/10";
     // include start button
     initialButton.style.visibility = 'visible';
     initialButton.textContent = "Restart Quiz"
+    intitialButton.addEventListener("click", gameReset())
     if(storedScores === null){
         prompt("You must play the quiz to get a highscore!");
         return;
