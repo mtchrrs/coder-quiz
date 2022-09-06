@@ -18,48 +18,50 @@ var detailsLabel = document.getElementById("initials-label");
 init();
 
 function init() {
-    buttonA.style.visibility = 'hidden';
-    buttonB.style.visibility = 'hidden';
-    buttonC.style.visibility = 'hidden';
-    buttonD.style.visibility = 'hidden';
-    highScoreList.style.visibility = 'hidden';
-    submissionsPage.style.visibility = 'hidden';
-    userDetails.style.visibility = 'hidden';
-    saveButton.style.visibility = 'hidden';
-    content.style.visibility = 'hidden';
+  buttonA.style.visibility = 'hidden';
+  buttonB.style.visibility = 'hidden';
+  buttonC.style.visibility = 'hidden';
+  buttonD.style.visibility = 'hidden';
+  highScoreList.style.visibility = 'hidden';
+  submissionsPage.style.visibility = 'hidden';
+  userDetails.style.visibility = 'hidden';
+  saveButton.style.visibility = 'hidden';
+  content.style.visibility = 'hidden';
 };
 
 function gameReset(){
-    buttonA.style.visibility = 'hidden';
-    buttonB.style.visibility = 'hidden';
-    buttonC.style.visibility = 'hidden';
-    buttonD.style.visibility = 'hidden';
-    highScoreList.style.visibility = 'hidden';
-    submissionsPage.style.visibility = 'hidden';
-    answerGrid.style.visibility = 'hidden';
-    userDetails.style.visibility = 'hidden';
-    saveButton.style.visibility = 'hidden';
-    content.style.visibility = 'hidden';
-    initialButton.style.visibility = 'visible';
+  buttonA.style.visibility = 'hidden';
+  buttonB.style.visibility = 'hidden';
+  buttonC.style.visibility = 'hidden';
+  buttonD.style.visibility = 'hidden';
+  highScoreList.style.visibility = 'hidden';
+  submissionsPage.style.visibility = 'hidden';
+  answerGrid.style.visibility = 'hidden';
+  userDetails.style.visibility = 'hidden';
+  saveButton.style.visibility = 'hidden';
+  content.style.visibility = 'hidden';
+  initialButton.style.visibility = 'visible';
 }
 
 // start button
 initialButton.addEventListener("click", function startQuiz(event) {
-    event.preventDefault();
-    // when I click the button... quiz starts
-    // timer starts counting down
-    timerRun();
-    // random question is presented
-    // 4 answers to the multiple choice question are shown
-    randomQuestion();
-    // disappears until viewhighscore page is shown
-    initialButton.style.visibility = 'hidden';
+  event.preventDefault();
+  // when I click the button... quiz starts
+  // timer starts counting down
+  timerRun();
+  // random question is presented
+  // 4 answers to the multiple choice question are shown
+  randomQuestion();
+  // disappears until viewhighscore page is shown
+  initialButton.style.visibility = 'hidden';
 });
 
 
 
 var secondsLeft = 30;
-
+var correctAns = 0;
+var wrongAnswer = 0;
+ 
 // timer
 function timerRun() {
     // Sets interval in variable
@@ -68,10 +70,7 @@ function timerRun() {
       secondsLeft--;
       timeLeft.textContent = "Time left: " + secondsLeft + " seconds";
      // if wrong answer, lose 5 secs
-       if(wrongAnswer++) {
-          secondsLeft-5;
-        }
-      if(secondsLeft === 0) {
+      if(secondsLeft <= 0) {
          // Stops execution of action at set interval
          clearInterval(timerInterval);
          // when timer = 0, then game over
@@ -89,91 +88,91 @@ function timerRun() {
 
 const questionsArray = [
     {
-   question1: "1", 
-   answer1:[
-    {text1: "a", correct: true},
+   question: "1", 
+   answer:[
+    {text1: "true", correct: true},
     {text2: "b", correct: false},
     {text3: "c", correct: false},
     {text4: "d", correct: false},
    ]
  },
  {
-    question2: "2", 
-    answer2:[
+    question: "2", 
+    answer:[
      {text1: "a", correct: false},
-     {text2: "b", correct: true},
+     {text2: "true", correct: true},
      {text3: "c", correct: false},
      {text4: "d", correct: false},
     ]
   },
   {
-    question3: "3", 
-    answer3:[
+    question: "3", 
+    answer:[
      {text1: "a", correct: false},
      {text2: "b", correct: false},
-     {text3: "c", correct: true},
+     {text3: "true", correct: true},
      {text4: "d", correct: false},
     ]
   },
   {
-    question4: "4", 
-    answer4:[
+    question: "4", 
+    answer:[
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
-     {text4: "d", correct: true},
+     {text4: "true", correct: true},
     ]
   },
   {
-    question5: "5", 
-    answer5:[
-     {text1: "a", correct: true},
-     {text2: "b", correct: false},
-     {text3: "c", correct: false},
-     {text4: "d", correct: false},
-    ]
-  },
-  {
-    question6: "6", 
-    answer6:[
-     {text: "a", correct: false},
-     {text: "b", correct: true},
-     {text: "c", correct: false},
-     {text: "d", correct: false},
-    ]
-  },
-  {
-    question7: "7", 
-    answer7:[
-     {text1: "a", correct: false},
-     {text2: "b", correct: false},
-     {text3: "c", correct: true},
-     {text4: "d", correct: false},
-    ]
-  },
-  {
-    question8: "8", 
-    answer8:[
-     {text1: "a", correct: false},
-     {text2: "b", correct: false},
-     {text3: "c", correct: false},
-     {text4: "d", correct: true},
-    ]
-  },
-  {
-    question9: "9", 
-    answer9:[
-     {text1: "a", correct: true},
+    question: "5", 
+    answer:[
+     {text1: "true", correct: true},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
      {text4: "d", correct: false},
     ]
   },
   {
-    question10: "10", 
-    answer10:[
+    question: "6", 
+    answer:[
      {text1: "a", correct: false},
-     {text2: "b", correct: true},
+     {text2: "true", correct: true},
+     {text3: "c", correct: false},
+     {text4: "d", correct: false},
+    ]
+  },
+  {
+    question: "7", 
+    answer:[
+     {text1: "a", correct: false},
+     {text2: "b", correct: false},
+     {text3: "true", correct: true},
+     {text4: "d", correct: false},
+    ]
+  },
+  {
+    question: "8", 
+    answer:[
+     {text1: "a", correct: false},
+     {text2: "b", correct: false},
+     {text3: "c", correct: false},
+     {text4: "true", correct: true},
+    ]
+  },
+  {
+    question: "9", 
+    answer:[
+     {text1: "true", correct: true},
+     {text2: "b", correct: false},
+     {text3: "c", correct: false},
+     {text4: "d", correct: false},
+    ]
+  },
+  {
+    question: "10", 
+    answer:[
+     {text1: "a", correct: false},
+     {text2: "true", correct: true},
      {text3: "c", correct: false},
      {text4: "d", correct: false},
     ]
@@ -183,125 +182,91 @@ const questionsArray = [
 
 // // each time an answer is put in, change question
 function randomQuestion(){
-    title.style.visibility = 'hidden';
-    answerGrid.style.visability = 'hidden';
-    buttonA.style.visibility = 'visible';
-    buttonB.style.visibility = 'visible';
-    buttonC.style.visibility = 'visible';
-    buttonD.style.visibility = 'visible';
-    content.style.visibility = 'visible';
-   
-   var questionFind = function() {
-     for(var i = 0; i <= questionsArray.length; i++){
-         Math.floor(Math.random(questionsArray[i]) * questionsArray.length);
-        } 
-     if(questionFind == questionsArray[0]){
-         buttonA.textContent = answer1.text1;
-         buttonB.textContent = answer1.text2;
-         buttonC.textContent = answer1.text3;
-         buttonD.textContent = answer1.text4;
-     } else if(questionFind == questionsArray[1]){
-         buttonA.textContent = answer2.text1;
-         buttonB.textContent = answer2.text2;
-         buttonC.textContent = answer2.text3;
-         buttonD.textContent = answer2.text4;
-     } else if(questionFind == questionsArray[2]){
-         buttonA.textContent = answer3.text1;
-         buttonB.textContent = answer3.text2;
-         buttonC.textContent = answer3.text3;
-         buttonD.textContent = answer3.text4;
-     } else if(questionFind == questionsArray[3]){
-         buttonA.textContent = answer4.text1;
-         buttonB.textContent = answer4.text2;
-         buttonC.textContent = answer4.text3;
-         buttonD.textContent = answer4.text4;
-     } else if(questionFind == questionsArray[4]){
-         buttonA.textContent = answer5.text1;
-         buttonB.textContent = answer5.text2;
-         buttonC.textContent = answer5.text3;
-         buttonD.textContent = answer5.text4;
-     } else if(questionFind == questionsArray[5]){
-         buttonA.textContent = answer6.text1;
-         buttonB.textContent = answer6.text2;
-         buttonC.textContent = answer6.text3;
-         buttonD.textContent = answer6.text4;
-     } else if(questionFind == questionsArray[6]){
-         buttonA.textContent = answer7.text1;
-         buttonB.textContent = answer7.text2;
-         buttonC.textContent = answer7.text3;
-         buttonD.textContent = answer7.text4;
-     } else if(questionFind == questionsArray[7]){
-         buttonA.textContent = answer8.text1;
-         buttonB.textContent = answer8.text2;
-         buttonC.textContent = answer8.text3;
-         buttonD.textContent = answer8.text4;
-     } else if(questionFind == questionsArray[8]){
-         buttonA.textContent = answer9.text1;
-         buttonB.textContent = answer9.text2;
-         buttonC.textContent = answer9.text3;
-         buttonD.textContent = answer9.text4;
-     }else if(questionFind == questionsArray[9]){
-         buttonA.textContent = answer10.text1;
-         buttonB.textContent = answer10.text2;
-         buttonC.textContent = answer10.text3;
-         buttonD.textContent = answer10.text4;
-     }};
-   questionFind();
-   content.textContent = questionFind();
-    
+  title.style.visibility = 'hidden';
+  answerGrid.style.visability = 'hidden';
+  buttonA.style.visibility = 'visible';
+  buttonB.style.visibility = 'visible';
+  buttonC.style.visibility = 'visible';
+  buttonD.style.visibility = 'visible';
+  content.style.visibility = 'visible';
+  var questionIndex = Math.floor(Math.random() * questionsArray.length);
+  var thisQuestion = questionsArray[questionIndex];
+
+  console.log(thisQuestion);
+
+  buttonA.textContent = thisQuestion.answer[0].text1;
+  buttonB.textContent = thisQuestion.answer[1].text2;
+  buttonC.textContent = thisQuestion.answer[2].text3;
+  buttonD.textContent = thisQuestion.answer[3].text4;
+
+  buttonA.setAttribute("data-correct",thisQuestion.answer[0].correct);
+  buttonA.setAttribute("data-correct",thisQuestion.answer[1].correct);
+  buttonA.setAttribute("data-correct",thisQuestion.answer[2].correct);
+  buttonA.setAttribute("data-correct",thisQuestion.answer[3].correct);
+
+  content.textContent = thisQuestion.question;
+
+ 
+ // multiple answers
+ // 4 answer pop up for each question
+ // when an answer is selected, then skip to the next question
+ 
+
 };
 
-var correctAns = 0;
-var wrongAnswer = 0;
-
-// multiple answers
-// 4 answer pop up for each question
-// when an answer is selected, then skip to the next question
 buttonA.addEventListener("click", function(event){
-    event.preventDefault();
-    if (buttonA == true){
-        // if the answer is correct, add 1 to correct
-        correctAns++;
-        randomQuestion();
-    } else {
-        // if the answer is wrong, add 1 to wrong, take 5 seconds from the clock
-        wrongAnswer++;
-        randomQuestion();
-    }
+  event.preventDefault();
+  if (event.target["data-correct"] === true){
+    // if the answer is correct, add 1 to correct
+    addAns();
+    randomQuestion();
+  } else {
+    // if the answer is wrong, add 1 to wrong, take 5 seconds from the clock
+    wrongAnswer++;
+    secondsLeft-=5;
+    randomQuestion();
+  }
 });
 
 buttonB.addEventListener("click", function(event){
-    event.preventDefault();
-    if (buttonB == true){
-        correctAns++;
-        randomQuestion();
-    } else {
-        wrongAnswer++;
-        randomQuestion();
-    }
+ event.preventDefault();
+  if (event.target["data-correct"] === true){
+    addAns();
+    randomQuestion();
+  } else {
+    wrongAnswer++;
+    secondsLeft-=5;
+    randomQuestion();
+  }
 });
 
 buttonC.addEventListener("click", function(event){
-    event.preventDefault();
-    if (buttonC == true){
-        correctAns++;
-        randomQuestion();
-    } else {
-        wrongAnswer++;
-        randomQuestion();
-    }
+  event.preventDefault();
+  if (event.target["data-correct"] === true){
+    addAns();
+    randomQuestion();
+  } else {
+    wrongAnswer++;
+    secondsLeft-=5;
+    randomQuestion();
+  }
 });
 
 buttonD.addEventListener("click", function(event){
-    event.preventDefault();
-    if (buttonD == true){
-        correctAns++;
-        randomQuestion();
-    } else {
-        wrongAnswer++;
-        randomQuestion();
-    }
+  event.preventDefault();
+  if (event.target["data-correct"] === true){
+    addAns();
+    randomQuestion();
+  } else {
+    wrongAnswer++;
+    secondsLeft-=5;
+    randomQuestion();
+  }
 });
+
+function addAns(){
+  correctAns++;
+};
 
 // game over
 // when timer is 0, game is over
@@ -328,49 +293,42 @@ function postQuizPage(event){
 };
 
 saveButton.addEventListener("click", function(event){
-    event.preventDefault();
-
-    var userHighScores = {
-        Initials: userDetails.value,
-        Score: correctAns,
-    };
-    // once details are submitted
-    // save data to local, run Highscores page
-    localStorage.setItem("userHighScores", JSON.stringify(userHighScores));
-    viewHighscores();
+  event.preventDefault();
+  var userHighScores = {
+    Initials: userDetails.value,
+    Score: correctAns,
+  };
+  // once details are submitted
+  // save data to local, run Highscores page
+  localStorage.setItem("userHighScores", JSON.stringify(userHighScores));
 
 });
 
-// viewighscores
-// shown once game is finished
-// shown by clicking View High Scores button
-viewHighScores.addEventListener("click", viewHighscores());
+// // viewighscores
+// // shown once game is finished
+// // shown by clicking View High Scores button
+// viewHighScores.addEventListener("click", viewHighscores());
 
-function viewHighscores() {
-    buttonA.style.visibility = 'hidden';
-    buttonB.style.visibility = 'hidden';
-    buttonC.style.visibility = 'hidden';
-    buttonD.style.visibility = 'hidden';
-    answerGrid.style.visibility = 'visible';
-    userDetails.style.visibility = 'hidden';
-    saveButton.style.visibility = 'hidden';
-    content.style.visibility = 'hidden';
-    // shows top 5 scores
-    title.textContent = "High Scores Page"
-    // show initials and the score /10
-    var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
-    answerGrid.textContent = storedScores.Initials + " scored " + storedScores.Score +"/10";
-    // include start button
-    initialButton.style.visibility = 'visible';
-    initialButton.textContent = "Restart Quiz"
-    intitialButton.addEventListener("click", gameReset())
-    if(storedScores === null){
-        prompt("You must play the quiz to get a highscore!");
-        return;
-    };
-   
-
-};
-
-
-
+// function viewHighscores() {
+//   buttonA.style.visibility = 'hidden';
+//   buttonB.style.visibility = 'hidden';
+//   buttonC.style.visibility = 'hidden';
+//   buttonD.style.visibility = 'hidden';
+//   answerGrid.style.visibility = 'visible';
+//   userDetails.style.visibility = 'hidden';
+//   saveButton.style.visibility = 'hidden';
+//   content.style.visibility = 'hidden';
+//   // shows top 5 scores
+//   title.textContent = "High Scores Page"
+//   // show initials and the score /10
+//   var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
+//   answerGrid.textContent = storedScores.Initials + " scored " + storedScores.Score +"/10";
+//   // include start button
+//   initialButton.style.visibility = 'visible';
+//   initialButton.textContent = "Restart Quiz";
+//   intitialButton.addEventListener("click", location.reload());
+//   if(storedScores === null){
+//     prompt("You must play the quiz to get a highscore!");
+//     return;
+//   };
+// };
