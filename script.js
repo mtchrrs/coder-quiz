@@ -14,6 +14,7 @@ var submissionsPage = document.getElementById("submissions");
 var highScoreList = document.getElementById("list-highscores");
 var content = document.getElementById("content");
 var detailsLabel = document.getElementById("initials-label");
+var restartButton = document.getElementById("restartButton");
 
 init();
 
@@ -27,13 +28,14 @@ function init() {
   userDetails.style.visibility = 'hidden';
   saveButton.style.visibility = 'hidden';
   content.style.visibility = 'hidden';
+  restartButton.style.visibility = 'hidden';
 };
 
 function gameReset(){
-  buttonA.style.visibility = 'hidden';
-  buttonB.style.visibility = 'hidden';
-  buttonC.style.visibility = 'hidden';
-  buttonD.style.visibility = 'hidden';
+  buttonA.style.display = 'none';
+  buttonB.style.display = 'none';
+  buttonC.style.display = 'none';
+  buttonD.style.display = 'none';
   highScoreList.style.visibility = 'hidden';
   submissionsPage.style.visibility = 'hidden';
   answerGrid.style.visibility = 'hidden';
@@ -41,6 +43,7 @@ function gameReset(){
   saveButton.style.visibility = 'hidden';
   content.style.visibility = 'hidden';
   initialButton.style.visibility = 'visible';
+  restartButton.style.visibility = 'hidden';
 }
 
 // start button
@@ -90,6 +93,7 @@ const questionsArray = [
     {
    question: "1", 
    answer:[
+    {correct: "true"}
     {text1: "true", correct: true},
     {text2: "b", correct: false},
     {text3: "c", correct: false},
@@ -99,6 +103,7 @@ const questionsArray = [
  {
     question: "2", 
     answer:[
+      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "true", correct: true},
      {text3: "c", correct: false},
@@ -108,6 +113,7 @@ const questionsArray = [
   {
     question: "3", 
     answer:[
+      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "true", correct: true},
@@ -117,6 +123,7 @@ const questionsArray = [
   {
     question: "4", 
     answer:[
+      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
@@ -126,6 +133,7 @@ const questionsArray = [
   {
     question: "5", 
     answer:[
+      {correct: "true"}
      {text1: "true", correct: true},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
@@ -135,6 +143,7 @@ const questionsArray = [
   {
     question: "6", 
     answer:[
+      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "true", correct: true},
      {text3: "c", correct: false},
@@ -144,6 +153,7 @@ const questionsArray = [
   {
     question: "7", 
     answer:[
+      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "true", correct: true},
@@ -153,6 +163,7 @@ const questionsArray = [
   {
     question: "8", 
     answer:[
+      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
@@ -162,6 +173,7 @@ const questionsArray = [
   {
     question: "9", 
     answer:[
+      {correct: "true"}
      {text1: "true", correct: true},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
@@ -171,6 +183,7 @@ const questionsArray = [
   {
     question: "10", 
     answer:[
+      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "true", correct: true},
      {text3: "c", correct: false},
@@ -199,11 +212,11 @@ function randomQuestion(){
   buttonC.textContent = thisQuestion.answer[2].text3;
   buttonD.textContent = thisQuestion.answer[3].text4;
 
-  buttonA.setAttribute("data-correct",thisQuestion.answer[0].correct);
-  buttonA.setAttribute("data-correct",thisQuestion.answer[1].correct);
-  buttonA.setAttribute("data-correct",thisQuestion.answer[2].correct);
-  buttonA.setAttribute("data-correct",thisQuestion.answer[3].correct);
-
+  // buttonA.setAttribute("data-correct",thisQuestion.answer[0].correct);
+  // buttonA.setAttribute("data-correct",thisQuestion.answer[1].correct);
+  // buttonA.setAttribute("data-correct",thisQuestion.answer[2].correct);
+  // buttonA.setAttribute("data-correct",thisQuestion.answer[3].correct);
+  
   content.textContent = thisQuestion.question;
 
  
@@ -211,12 +224,12 @@ function randomQuestion(){
  // 4 answer pop up for each question
  // when an answer is selected, then skip to the next question
  
-
 };
 
+//need to bring variable from the questions to match the one selected in the answer
 buttonA.addEventListener("click", function(event){
   event.preventDefault();
-  if (event.target["data-correct"] === true){
+  if (event.target["data-correct"] === correct){
     // if the answer is correct, add 1 to correct
     addAns();
     randomQuestion();
@@ -272,23 +285,23 @@ function addAns(){
 // when timer is 0, game is over
 // when game over, run submission page
 function postQuizPage(event){
-    // event.preventDefault();
-    buttonA.style.visibility = 'hidden';
-    buttonB.style.visibility = 'hidden';
-    buttonC.style.visibility = 'hidden';
-    buttonD.style.visibility = 'hidden';
-    answerGrid.style.visibility = 'hidden';
-    userDetails.style.visibility = 'visible';
-    saveButton.style.visibility = 'visible';
-    detailsLabel.style.visibility = 'hidden';
-    title.style.visibility = 'visible';
-    saveButton.textContent = "Submit";
-    // input initials and score
-    // into submission page
-    // present the score /10
-    title.textContent = "Well done! You achieved " + correctAns + "/10";
-    content.textContent = "What are your initials?";
-    // supply an Initials input
+  // event.preventDefault();
+  buttonA.style.visibility = 'hidden';
+  buttonB.style.visibility = 'hidden';
+  buttonC.style.visibility = 'hidden';
+  buttonD.style.visibility = 'hidden';
+  answerGrid.style.visibility = 'hidden';
+  userDetails.style.visibility = 'visible';
+  saveButton.style.visibility = 'visible';
+  detailsLabel.style.visibility = 'hidden';
+  title.style.visibility = 'visible';
+  saveButton.textContent = "Submit";
+  // input initials and score
+  // into submission page
+  // present the score /10    
+  title.textContent = "Well done! You achieved " + correctAns + "/10";
+  content.textContent = "What are your initials?";
+  // supply an Initials input
     
 };
 
@@ -301,34 +314,44 @@ saveButton.addEventListener("click", function(event){
   // once details are submitted
   // save data to local, run Highscores page
   localStorage.setItem("userHighScores", JSON.stringify(userHighScores));
-
+  location.reload(true);
 });
 
 // // viewighscores
 // // shown once game is finished
 // // shown by clicking View High Scores button
-// viewHighScores.addEventListener("click", viewHighscores());
+viewHighScores.addEventListener("click", function(event){
+  event.preventDefault
+  buttonA.style.display = 'none';
+  buttonB.style.display = 'none';
+  buttonC.style.display = 'none';
+  buttonD.style.display = 'none';
+  answerGrid.style.visibility = 'visible';
+  userDetails.style.visibility = 'hidden';
+  saveButton.style.visibility = 'hidden';
+  content.style.visibility = 'hidden';
+  initialButton.style.visibility = 'hidden';
+  restartButton.style.visibility = 'visible';
+  // shows top 5 scores
+  title.textContent = "High Scores Page"
+  // show initials and the score /10
+  var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
+  if (storedScores.Score === 0) {
+   answerGrid.style.display = 'none';
+  } else {
+   answerGrid.textContent = storedScores.Initials + " scored " + storedScores.Score +"/10";
+  }
+  // include start button
+ 
+  if(storedScores.Initials == null){
+    alert("You must play the quiz to get a highscore!");
+    location.reload();
+  } 
+});
 
-// function viewHighscores() {
-//   buttonA.style.visibility = 'hidden';
-//   buttonB.style.visibility = 'hidden';
-//   buttonC.style.visibility = 'hidden';
-//   buttonD.style.visibility = 'hidden';
-//   answerGrid.style.visibility = 'visible';
-//   userDetails.style.visibility = 'hidden';
-//   saveButton.style.visibility = 'hidden';
-//   content.style.visibility = 'hidden';
-//   // shows top 5 scores
-//   title.textContent = "High Scores Page"
-//   // show initials and the score /10
-//   var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
-//   answerGrid.textContent = storedScores.Initials + " scored " + storedScores.Score +"/10";
-//   // include start button
-//   initialButton.style.visibility = 'visible';
-//   initialButton.textContent = "Restart Quiz";
-//   intitialButton.addEventListener("click", location.reload());
-//   if(storedScores === null){
-//     prompt("You must play the quiz to get a highscore!");
-//     return;
-//   };
-// };
+restartButton.addEventListener("click", function(event){
+  event.preventDefault();
+  location.reload(true);
+});
+
+// shows last 5 scores

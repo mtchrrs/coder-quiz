@@ -83,7 +83,11 @@ body {
 }
 
 #answers{
-  
+  text-align: center;
+  font-style: bold;
+  margin-top: 10px;
+  margin-bottom:20px;
+  font-size: 20px;
 }
 
 .submitspage{
