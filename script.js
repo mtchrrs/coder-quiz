@@ -15,6 +15,7 @@ var highScoreList = document.getElementById("list-highscores");
 var content = document.getElementById("content");
 var detailsLabel = document.getElementById("initials-label");
 var restartButton = document.getElementById("restartButton");
+var hiddenAns = document.getElementById("hiddenAns");
 
 init();
 
@@ -63,7 +64,7 @@ initialButton.addEventListener("click", function startQuiz(event) {
 
 var secondsLeft = 30;
 var correctAns = 0;
-var wrongAnswer = 0;
+
  
 // timer
 function timerRun() {
@@ -93,95 +94,106 @@ const questionsArray = [
     {
    question: "1", 
    answer:[
-    {text1: "true", correct: true},
-    {text2: "b", correct: false},
-    {text3: "c", correct: false},
-    {text4: "d", correct: false},
+    {text1: "true"},
+    {text2: "b"},
+    {text3: "c"},
+    {text4: "d"},
+    {ans: "true"},
    ]
  },
  {
     question: "2", 
     answer:[
-     {text1: "a", correct: false},
-     {text2: "true", correct: true},
-     {text3: "c", correct: false},
-     {text4: "d", correct: false},
+     {text1: "a"},
+     {text2: "true"},
+     {text3: "c"},
+     {text4: "d"},
+     {ans: "true"},
     ]
   },
   {
     question: "3", 
     answer:[
-     {text1: "a", correct: false},
-     {text2: "b", correct: false},
-     {text3: "true", correct: true},
-     {text4: "d", correct: false},
+     {text1: "a"},
+     {text2: "b"},
+     {text3: "true"},
+     {text4: "d"},
+     {ans: "true"},
     ]
   },
   {
     question: "4", 
     answer:[
-     {text1: "a", correct: false},
-     {text2: "b", correct: false},
-     {text3: "c", correct: false},
-     {text4: "true", correct: true},
+     {text1: "a"},
+     {text2: "b"},
+     {text3: "c"},
+     {text4: "true"},
+     {ans: "true"},
     ]
   },
   {
     question: "5", 
     answer:[
-     {text1: "true", correct: true},
-     {text2: "b", correct: false},
-     {text3: "c", correct: false},
-     {text4: "d", correct: false},
+     {text1: "true"},
+     {text2: "b"},
+     {text3: "c"},
+     {text4: "d"},
+     {ans: "true"},
     ]
   },
   {
     question: "6", 
     answer:[
-     {text1: "a", correct: false},
-     {text2: "true", correct: true},
-     {text3: "c", correct: false},
-     {text4: "d", correct: false},
+     {text1: "a"},
+     {text2: "true"},
+     {text3: "c"},
+     {text4: "d"},
+     {ans: "true"},
     ]
   },
   {
     question: "7", 
     answer:[
-     {text1: "a", correct: false},
-     {text2: "b", correct: false},
-     {text3: "true", correct: true},
-     {text4: "d", correct: false},
+     {text1: "a"},
+     {text2: "b"},
+     {text3: "true"},
+     {text4: "d"},
+     {ans: "true"},
     ]
   },
   {
     question: "8", 
     answer:[
-     {text1: "a", correct: false},
-     {text2: "b", correct: false},
-     {text3: "c", correct: false},
-     {text4: "true", correct: true},
+     {text1: "a"},
+     {text2: "b"},
+     {text3: "c"},
+     {text4: "true"},
+     {ans: "true"},
     ]
   },
   {
     question: "9", 
     answer:[
-     {text1: "true", correct: true},
-     {text2: "b", correct: false},
-     {text3: "c", correct: false},
-     {text4: "d", correct: false},
+     {text1: "true"},
+     {text2: "b"},
+     {text3: "c"},
+     {text4: "d"},
+     {ans: "true"},
     ]
   },
   {
     question: "10", 
     answer:[
-     {text1: "a", correct: false},
-     {text2: "true", correct: true},
-     {text3: "c", correct: false},
-     {text4: "d", correct: false},
+     {text1: "a"},
+     {text2: "true"},
+     {text3: "c"},
+     {text4: "d"},
+     {ans: "true"},
     ]
   },
 ];
 
+let yourGlobalVariable  
 
 // // each time an answer is put in, change question
 function randomQuestion(){
@@ -202,30 +214,32 @@ function randomQuestion(){
   buttonC.textContent = thisQuestion.answer[2].text3;
   buttonD.textContent = thisQuestion.answer[3].text4;
 
-  buttonA.setAttribute("data-correct",thisQuestion.answer[0].correct);
-  buttonA.setAttribute("data-correct",thisQuestion.answer[1].correct);
-  buttonA.setAttribute("data-correct",thisQuestion.answer[2].correct);
-  buttonA.setAttribute("data-correct",thisQuestion.answer[3].correct);
+  // buttonA.setAttribute("data-correct",thisQuestion.answer[0].correct);
+  // buttonA.setAttribute("data-correct",thisQuestion.answer[1].correct);
+  // buttonA.setAttribute("data-correct",thisQuestion.answer[2].correct);
+  // buttonA.setAttribute("data-correct",thisQuestion.answer[3].correct);
   
   content.textContent = thisQuestion.question;
+  var correctAnswer = thisQuestion.answer[4].ans;
 
- 
+  localStorage.setItem("correctAnswer", JSON.stringify(correctAnswer));
  // multiple answers
  // 4 answer pop up for each question
  // when an answer is selected, then skip to the next question
  
 };
 
+var rightButton = JSON.parse(localStorage.getItem("correctAnswer"));
+
 //need to bring variable from the questions to match the one selected in the answer
 buttonA.addEventListener("click", function(event){
   event.preventDefault();
-  if (event.target["data-correct"] === true){
+  if (buttonA.textContent == rightButton){
     // if the answer is correct, add 1 to correct
-    addAns();
+    correctAns++;
     randomQuestion();
   } else {
     // if the answer is wrong, add 1 to wrong, take 5 seconds from the clock
-    wrongAnswer++;
     secondsLeft-=5;
     randomQuestion();
   }
@@ -233,11 +247,10 @@ buttonA.addEventListener("click", function(event){
 
 buttonB.addEventListener("click", function(event){
  event.preventDefault();
-  if (event.target["data-correct"] === true){
-    addAns();
+  if (buttonB.textContent == rightButton){
+    correctAns++;
     randomQuestion();
   } else {
-    wrongAnswer++;
     secondsLeft-=5;
     randomQuestion();
   }
@@ -245,11 +258,10 @@ buttonB.addEventListener("click", function(event){
 
 buttonC.addEventListener("click", function(event){
   event.preventDefault();
-  if (event.target["data-correct"] === true){
-    addAns();
+  if (buttonC.textContent == rightButton){
+    correctAns++;
     randomQuestion();
   } else {
-    wrongAnswer++;
     secondsLeft-=5;
     randomQuestion();
   }
@@ -257,19 +269,15 @@ buttonC.addEventListener("click", function(event){
 
 buttonD.addEventListener("click", function(event){
   event.preventDefault();
-  if (event.target["data-correct"] === true){
-    addAns();
+  if (buttonD.textContent == rightButton){
+    correctAns++;
     randomQuestion();
   } else {
-    wrongAnswer++;
     secondsLeft-=5;
     randomQuestion();
   }
 });
 
-function addAns(){
-  correctAns++;
-};
 
 // game over
 // when timer is 0, game is over
