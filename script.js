@@ -93,7 +93,6 @@ const questionsArray = [
     {
    question: "1", 
    answer:[
-    {correct: "true"}
     {text1: "true", correct: true},
     {text2: "b", correct: false},
     {text3: "c", correct: false},
@@ -103,7 +102,6 @@ const questionsArray = [
  {
     question: "2", 
     answer:[
-      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "true", correct: true},
      {text3: "c", correct: false},
@@ -113,7 +111,6 @@ const questionsArray = [
   {
     question: "3", 
     answer:[
-      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "true", correct: true},
@@ -123,7 +120,6 @@ const questionsArray = [
   {
     question: "4", 
     answer:[
-      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
@@ -133,7 +129,6 @@ const questionsArray = [
   {
     question: "5", 
     answer:[
-      {correct: "true"}
      {text1: "true", correct: true},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
@@ -143,7 +138,6 @@ const questionsArray = [
   {
     question: "6", 
     answer:[
-      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "true", correct: true},
      {text3: "c", correct: false},
@@ -153,7 +147,6 @@ const questionsArray = [
   {
     question: "7", 
     answer:[
-      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "true", correct: true},
@@ -163,7 +156,6 @@ const questionsArray = [
   {
     question: "8", 
     answer:[
-      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
@@ -173,7 +165,6 @@ const questionsArray = [
   {
     question: "9", 
     answer:[
-      {correct: "true"}
      {text1: "true", correct: true},
      {text2: "b", correct: false},
      {text3: "c", correct: false},
@@ -183,7 +174,6 @@ const questionsArray = [
   {
     question: "10", 
     answer:[
-      {correct: "true"}
      {text1: "a", correct: false},
      {text2: "true", correct: true},
      {text3: "c", correct: false},
@@ -212,10 +202,10 @@ function randomQuestion(){
   buttonC.textContent = thisQuestion.answer[2].text3;
   buttonD.textContent = thisQuestion.answer[3].text4;
 
-  // buttonA.setAttribute("data-correct",thisQuestion.answer[0].correct);
-  // buttonA.setAttribute("data-correct",thisQuestion.answer[1].correct);
-  // buttonA.setAttribute("data-correct",thisQuestion.answer[2].correct);
-  // buttonA.setAttribute("data-correct",thisQuestion.answer[3].correct);
+  buttonA.setAttribute("data-correct",thisQuestion.answer[0].correct);
+  buttonA.setAttribute("data-correct",thisQuestion.answer[1].correct);
+  buttonA.setAttribute("data-correct",thisQuestion.answer[2].correct);
+  buttonA.setAttribute("data-correct",thisQuestion.answer[3].correct);
   
   content.textContent = thisQuestion.question;
 
@@ -229,7 +219,7 @@ function randomQuestion(){
 //need to bring variable from the questions to match the one selected in the answer
 buttonA.addEventListener("click", function(event){
   event.preventDefault();
-  if (event.target["data-correct"] === correct){
+  if (event.target["data-correct"] === true){
     // if the answer is correct, add 1 to correct
     addAns();
     randomQuestion();
