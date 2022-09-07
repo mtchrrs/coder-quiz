@@ -230,10 +230,11 @@ function randomQuestion(){
 };
 
 var rightButton = JSON.parse(localStorage.getItem("correctAnswer"));
-
+let count = 0
 //need to bring variable from the questions to match the one selected in the answer
 buttonA.addEventListener("click", function(event){
   event.preventDefault();
+  count ++;
   if (buttonA.textContent == rightButton){
     // if the answer is correct, add 1 to correct
     correctAns++;
@@ -247,6 +248,7 @@ buttonA.addEventListener("click", function(event){
 
 buttonB.addEventListener("click", function(event){
  event.preventDefault();
+ count ++;
   if (buttonB.textContent == rightButton){
     correctAns++;
     randomQuestion();
@@ -258,6 +260,7 @@ buttonB.addEventListener("click", function(event){
 
 buttonC.addEventListener("click", function(event){
   event.preventDefault();
+  count ++;
   if (buttonC.textContent == rightButton){
     correctAns++;
     randomQuestion();
@@ -269,6 +272,7 @@ buttonC.addEventListener("click", function(event){
 
 buttonD.addEventListener("click", function(event){
   event.preventDefault();
+  count ++;
   if (buttonD.textContent == rightButton){
     correctAns++;
     randomQuestion();
@@ -297,23 +301,36 @@ function postQuizPage(event){
   // input initials and score
   // into submission page
   // present the score /10    
-  title.textContent = "Well done! You achieved " + correctAns + "/10";
+  title.textContent = "Well done! You achieved " + correctAns + "/" + count;
   content.textContent = "What are your initials?";
   // supply an Initials input
     
 };
 
+
+let arr = [];
 saveButton.addEventListener("click", function(event){
   event.preventDefault();
   var userHighScores = {
     Initials: userDetails.value,
-    Score: correctAns,
+    Score: correctAns, count,
   };
+
+  arr.push(userHighScores)
   // once details are submitted
   // save data to local, run Highscores page
-  localStorage.setItem("userHighScores", JSON.stringify(userHighScores));
-  location.reload(true);
+  localStorage.setItem("userHighScores", JSON.stringify(arr));
+  // location.reload(true);
 });
+
+// to get multiple stored scores, ie initials and scores, 
+// i want to save multiple inputs to local storage
+
+// i want to load and save them into an object
+
+//from that object I want to save them into an array that exists in the local storage
+//this array can hold 5 objects
+//when more than 5 objects are in there, it deletes the oldest
 
 // // viewighscores
 // // shown once game is finished
@@ -334,10 +351,18 @@ viewHighScores.addEventListener("click", function(event){
   title.textContent = "High Scores Page"
   // show initials and the score /10
   var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
+  var scoreStorage = [{}, {}, {}, {}, {}]
+  scoreStorage.push(storedScores);
+  localStorage.setItem("scoreStorage", JSON.stringify(scoreStorage));
+
+ var finalLog = JSON.parse(localStorage.getItem("scoreStorage"));
+
+  console.log(finalLog);
+
   if (storedScores.Score === 0) {
    answerGrid.style.display = 'none';
   } else {
-   answerGrid.textContent = storedScores.Initials + " scored " + storedScores.Score +"/10";
+   answerGrid.textContent = storedScores.Initials + " scored a total of " + storedScores.Score + " right in 30 seconds!";
   }
   // include start button
  
