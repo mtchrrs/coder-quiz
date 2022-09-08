@@ -204,7 +204,6 @@ function randomQuestion(){
   content.textContent = thisQuestion.question;
   // create a variable which represents the correct answer, as found in the questions array
   var correctAnswer = thisQuestion.answer[4].ans;
-  //console.log(correctAnswer);
   // store the correct answer in local storage for later reference
   localStorage.setItem("correctAnswer", JSON.stringify(correctAnswer));
 };
