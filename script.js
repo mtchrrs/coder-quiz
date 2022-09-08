@@ -349,7 +349,7 @@ viewHighScores.addEventListener("click", function(event){
   
   title.textContent = "High Scores Page"
   
-  var storedScores = localStorage.getItem("userHighScores");
+  var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
  
   answerGrid.textContent = storedScores;
 
