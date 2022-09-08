@@ -11,7 +11,6 @@ var buttonD = document.getElementById("buttonD");
 var userDetails = document.getElementById("inputDetails");
 var saveButton = document.getElementById("saveButton");
 var submissionsPage = document.getElementById("submissions");
-var highScoreList = document.getElementById("list-highscores");
 var content = document.getElementById("content");
 var detailsLabel = document.getElementById("initials-label");
 var restartButton = document.getElementById("restartButton");
@@ -24,7 +23,6 @@ function init() {
   buttonB.style.visibility = 'hidden';
   buttonC.style.visibility = 'hidden';
   buttonD.style.visibility = 'hidden';
-  highScoreList.style.visibility = 'hidden';
   submissionsPage.style.visibility = 'hidden';
   userDetails.style.visibility = 'hidden';
   saveButton.style.visibility = 'hidden';
@@ -37,7 +35,6 @@ function gameReset(){
   buttonB.style.display = 'none';
   buttonC.style.display = 'none';
   buttonD.style.display = 'none';
-  highScoreList.style.visibility = 'hidden';
   submissionsPage.style.visibility = 'hidden';
   answerGrid.style.visibility = 'hidden';
   userDetails.style.visibility = 'hidden';
@@ -312,7 +309,7 @@ saveButton.addEventListener("click", function(event){
     Score: correctAns, 
     Count: count,
   };
-
+ 
   arr.push(userHighScores)
   // once details are submitted
   // save data to local, run Highscores page
@@ -340,28 +337,31 @@ viewHighScores.addEventListener("click", function(event){
   buttonB.style.display = 'none';
   buttonC.style.display = 'none';
   buttonD.style.display = 'none';
-  answerGrid.style.visibility = 'visible';
-  userDetails.style.visibility = 'hidden';
-  saveButton.style.visibility = 'hidden';
-  content.style.visibility = 'hidden';
-  initialButton.style.visibility = 'hidden';
+  answerGrid.style.display = 'none';
+  userDetails.style.display = 'none';
+  saveButton.style.display = 'none';
+  content.style.display = 'none';
+  initialButton.style.display = 'none';
   restartButton.style.visibility = 'visible';
-  highScoreList.style.visibility = 'hidden';
+  
   
   title.textContent = "High Scores Page"
   
   var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
- 
+  storedScores.sort((a, b) => b.Score - a.Score);
+  console.log(storedScores);
+
   var ul = document.createElement('ul');
-  
+  ul.setAttribute('id', 'created-ul');
   SectionHighScore.appendChild(ul);
   
   for(var i=0; i<5; i++){
     var li = document.createElement('li');
+    li.setAttribute('id', 'created-li');
     li.innerHTML = `${storedScores[i].Initials} scored ${storedScores[i].Score} / ${storedScores[i].Count} in 30 seconds!`;
     ul.appendChild(li);
-
   }
+ 
   
 });
 
