@@ -345,23 +345,25 @@ viewHighScores.addEventListener("click", function(event){
   content.style.visibility = 'hidden';
   initialButton.style.visibility = 'hidden';
   restartButton.style.visibility = 'visible';
-  highScoreList.style.visibility = 'visible';
+  highScoreList.style.visibility = 'hidden';
   
   title.textContent = "High Scores Page"
   
   var storedScores = localStorage.getItem("userHighScores");
  
+  answerGrid.textContent = storedScores;
+
   // NEED ASSISTANCE
-  var ul = document.createElement('ul');
-  var li = document.createElement('li');
-  for(var i=0; i<5; i++){
-    SectionHighScore.appendChild(ul);
-    ul.appendChild(li);
-    if(Array.isArray(storedScores[i])){
-      li.innerHTML = storedScores[i];
-    }
-  };
-  console.log(SectionHighScore);
+  // var ul = document.createElement('ul');
+  // var li = document.createElement('li');
+  // for(var i=0; i<5; i++){
+  //   SectionHighScore.appendChild(ul);
+  //   ul.appendChild(li);
+  //   if(Array.isArray(storedScores[i])){
+  //     li.innerHTML = storedScores[i];
+  //   }
+  // };
+  // console.log(SectionHighScore);
  // NEED ASSISTANCE
 });
 
