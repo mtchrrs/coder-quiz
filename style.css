@@ -8,14 +8,17 @@ body {
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  background-color:#C700EA;
 }
 
 .mainDiv {
+  width: 1200px;
   background-color: #cc8be0;
   border: 10px solid #000000;
   border-radius: 10px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0,
-    rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
 }
 
 .pageTitle{
@@ -41,8 +44,19 @@ body {
   float: left;
 }  
 
-#viewHighscores{
-  
+#created-ul{
+  list-style: none;
+  position: relative;
+  text-align: center;
+  flex: column;
+  margin-bottom: 40px;
+}
+
+#created-li{
+  font-style: bold;
+  margin-top: 10px;
+  margin-bottom:10px;
+  font-size: 30px;
 }
 
 #timeLeft{
@@ -64,6 +78,7 @@ body {
   position: relative;
   height: 600px;
   text-align: center;
+  
 }
 
 #main-title{
@@ -98,17 +113,9 @@ body {
   list-style: none;
 }
 
-#submissions{
-
-}
 
 .highscore-count{
   list-style: none;
-}
-
-
-#inputDetails{
-
 }
 
 .answerButtons{

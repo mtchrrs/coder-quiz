@@ -1,30 +1,30 @@
+// define elements in the order that they appear in the HTML file for easier reference
 var viewHighScores = document.getElementById("viewHighscores");
 var timeLeft = document.getElementById("timeLeft");
 var mainPage = document.getElementById("mainPage");
 var title = document.getElementById("main-title");
-var initialButton = document.getElementById("initialButton");
+var content = document.getElementById("content");
+var hiddenAns = document.getElementById("hiddenAns");
 var answerGrid = document.getElementById("answers");
 var buttonA = document.getElementById("buttonA");
 var buttonB = document.getElementById("buttonB");
 var buttonC = document.getElementById("buttonC");
 var buttonD = document.getElementById("buttonD");
+var submissionsPage = document.getElementById("submissions");
 var userDetails = document.getElementById("inputDetails");
 var saveButton = document.getElementById("saveButton");
-var submissionsPage = document.getElementById("submissions");
-var highScoreList = document.getElementById("list-highscores");
-var content = document.getElementById("content");
-var detailsLabel = document.getElementById("initials-label");
+var initialButton = document.getElementById("initialButton");
+var sectionHighScore = document.getElementById("section-highscore");
 var restartButton = document.getElementById("restartButton");
-var hiddenAns = document.getElementById("hiddenAns");
 
+// call the init function so that the web application starts up with a clean workspace
 init();
-
+//create an init function to hide elements that arent needed yet upon opening the application
 function init() {
   buttonA.style.visibility = 'hidden';
   buttonB.style.visibility = 'hidden';
   buttonC.style.visibility = 'hidden';
   buttonD.style.visibility = 'hidden';
-  highScoreList.style.visibility = 'hidden';
   submissionsPage.style.visibility = 'hidden';
   userDetails.style.visibility = 'hidden';
   saveButton.style.visibility = 'hidden';
@@ -32,72 +32,57 @@ function init() {
   restartButton.style.visibility = 'hidden';
 };
 
-function gameReset(){
-  buttonA.style.display = 'none';
-  buttonB.style.display = 'none';
-  buttonC.style.display = 'none';
-  buttonD.style.display = 'none';
-  highScoreList.style.visibility = 'hidden';
-  submissionsPage.style.visibility = 'hidden';
-  answerGrid.style.visibility = 'hidden';
-  userDetails.style.visibility = 'hidden';
-  saveButton.style.visibility = 'hidden';
-  content.style.visibility = 'hidden';
-  initialButton.style.visibility = 'visible';
-  restartButton.style.visibility = 'hidden';
-}
-
-// start button
+// start button - when I click the button => quiz starts
 initialButton.addEventListener("click", function startQuiz(event) {
   event.preventDefault();
-  // when I click the button... quiz starts
-  // timer starts counting down
+  // call the timerRun function => timer starts counting down
   timerRun();
-  // random question is presented
-  // 4 answers to the multiple choice question are shown
+  // call the randomQuestion function => random question is presented
   randomQuestion();
-  // disappears until viewhighscore page is shown
+  // initial button then disappears until the page is reloaded
   initialButton.style.visibility = 'hidden';
 });
 
-
-
+// created variables to record 
+// (a) the seconds left, starting at 30
 var secondsLeft = 30;
+// (b) the correct answers, starting at 0
 var correctAns = 0;
 
- 
-// timer
+// timer - called in 'intialButton' => counts down from secondsLeft var, stops at 0, time over!
 function timerRun() {
-    // Sets interval in variable
+    // sets timer interval to 'count down' every second
     var timerInterval = setInterval(function() {
-      // counts down from 30
+      // takes one from 'secondsLeft' var (globally defined)
       secondsLeft--;
+      // shows the text content at the top right of the application
       timeLeft.textContent = "Time left: " + secondsLeft + " seconds";
-     // if wrong answer, lose 5 secs
+      // stops the timer from going below 0, and stops the game
       if(secondsLeft <= 0) {
-         // Stops execution of action at set interval
-         clearInterval(timerInterval);
-         // when timer = 0, then game over
-         timeLeft.textContent = "Time Over!";
-         postQuizPage();
-        }
-        // switch to highscores page once time is over
-        
+        // stops execution of action at set interval
+        clearInterval(timerInterval);
+        // when timer = 0, then game over
+        timeLeft.textContent = "Time Over!";
+        // runs the postQuizPage
+        postQuizPage();
+       } 
     }, 1000);
     
 }
 
-// random question
-//have a collection of 10 questions
-
+// array of ten question objects --> why an array?
+// this allows me to store the question, possible answers and answers all in one place
 const questionsArray = [
     {
+   //this shows the actual question to be asked
    question: "1", 
    answer:[
+    // these are the multi-choice options to pick from
     {text1: "true"},
     {text2: "b"},
     {text3: "c"},
     {text4: "d"},
+    // this is the correct answer that matches one of the multi-choice options
     {ans: "true"},
    ]
  },
@@ -193,50 +178,55 @@ const questionsArray = [
   },
 ];
 
-let yourGlobalVariable  
-
-// // each time an answer is put in, change question
+// this function runs when the 'initialButton' is run
+// randomQuestion picks a question from the array so that it can be presented to the user
 function randomQuestion(){
+  // hide the title and answer grid elements
   title.style.visibility = 'hidden';
   answerGrid.style.visability = 'hidden';
+  // show the button icons in the webpage
   buttonA.style.visibility = 'visible';
   buttonB.style.visibility = 'visible';
   buttonC.style.visibility = 'visible';
   buttonD.style.visibility = 'visible';
   content.style.visibility = 'visible';
+  // create a variable that picks a random number from the lenght of the array using math floor
   var questionIndex = Math.floor(Math.random() * questionsArray.length);
+  // create a variable that identifies the question number from the array
   var thisQuestion = questionsArray[questionIndex];
-
-  console.log(thisQuestion);
-
+  // present the multi-choice options from the question picked above 
   buttonA.textContent = thisQuestion.answer[0].text1;
   buttonB.textContent = thisQuestion.answer[1].text2;
   buttonC.textContent = thisQuestion.answer[2].text3;
   buttonD.textContent = thisQuestion.answer[3].text4;
-
+  // shows the actual question in the 'content' section of the application
   content.textContent = thisQuestion.question;
+  // create a variable which represents the correct answer, as found in the questions array
   var correctAnswer = thisQuestion.answer[4].ans;
-
+  // store the correct answer in local storage for later reference
   localStorage.setItem("correctAnswer", JSON.stringify(correctAnswer));
- // multiple answers
- // 4 answer pop up for each question
- // when an answer is selected, then skip to the next question
- 
 };
 
+// create a global variable from correct answer (logged above) to reference in the buttons
 var rightButton = JSON.parse(localStorage.getItem("correctAnswer"));
+// create a variable for the questions attempted for a more accurate reading
 let count = 0
-//need to bring variable from the questions to match the one selected in the answer
+
+// create a button and event listener for each multi-choice answer to record user selections
 buttonA.addEventListener("click", function(event){
   event.preventDefault();
+  // increases the questions attempted count (when button is clicked)
   count ++;
+  // uses the variable with the correct answer and compares it to the buttons content
   if (buttonA.textContent == rightButton){
     // if the answer is correct, add 1 to correct
     correctAns++;
+    // re-run the random Question funtion
     randomQuestion();
   } else {
-    // if the answer is wrong, add 1 to wrong, take 5 seconds from the clock
+    // if the answer is wrong take 5 seconds from the timer (secondsLeft var)
     secondsLeft-=5;
+    // re-run the random Question function
     randomQuestion();
   }
 });
@@ -278,93 +268,88 @@ buttonD.addEventListener("click", function(event){
 });
 
 
-// game over
-// when timer is 0, game is over
-// when game over, run submission page
-function postQuizPage(event){
-  // event.preventDefault();
+// the game is over when timer is 0, when the game is over, run submission page
+function postQuizPage(){
+  // hide the multi-choice buttons and answerGrid content
   buttonA.style.visibility = 'hidden';
   buttonB.style.visibility = 'hidden';
   buttonC.style.visibility = 'hidden';
   buttonD.style.visibility = 'hidden';
   answerGrid.style.visibility = 'hidden';
+  // show the user details var, save button and title var
   userDetails.style.visibility = 'visible';
   saveButton.style.visibility = 'visible';
-  detailsLabel.style.visibility = 'hidden';
   title.style.visibility = 'visible';
+ // show the content on the save button as submit
   saveButton.textContent = "Submit";
-  // input initials and score
-  // into submission page
-  // present the score /10    
+  // input initials, presents the score correct out of attempted questions    
   title.textContent = "Well done! You achieved " + correctAns + "/" + count;
   content.textContent = "What are your initials?";
-  // supply an Initials input
-    
+  // supply an Initials input (userDetails)
 };
 
-
-
+// create a button that submits the user details after the initials have been entered and reloads game
 saveButton.addEventListener("click", function(event){
   event.preventDefault();
+  // create an array called 'arr' that recieves existing "userHighScores" saved to local storage
   let arr = JSON.parse(localStorage.getItem("userHighScores")) || [];
+  // then create an object to hold the game stats i.e initials, score, questions attempted
   var userHighScores = {
     Initials: userDetails.value,
     Score: correctAns, 
     Count: count,
   };
-
+  // push the object 'userHighScores' to the variable
   arr.push(userHighScores)
-  // once details are submitted
-  // save data to local, run Highscores page
+  // save variable and object to the local storage
   localStorage.setItem("userHighScores", JSON.stringify(arr));
+  // then reload the page to start the home page again
   location.reload(true);
 });
 
-// to get multiple stored scores, ie initials and scores, 
-// i want to save multiple inputs to local storage
-
-// i want to load and save them into an object
-
-//from that object I want to save them into an array that exists in the local storage
-//this array can hold 5 objects
-//when more than 5 objects are in there, it deletes the oldest
-
-// // viewighscores
-// // shown once game is finished
-// // shown by clicking View High Scores button
-var SectionHighScore = document.getElementById("section-highscore");
-
+// viewighscores button ==> only access to high scores page
 viewHighScores.addEventListener("click", function(event){
   event.preventDefault
+  // remove from display any var that is not needed
   buttonA.style.display = 'none';
   buttonB.style.display = 'none';
   buttonC.style.display = 'none';
   buttonD.style.display = 'none';
-  answerGrid.style.visibility = 'visible';
-  userDetails.style.visibility = 'hidden';
-  saveButton.style.visibility = 'hidden';
-  content.style.visibility = 'hidden';
-  initialButton.style.visibility = 'hidden';
+  answerGrid.style.display = 'none';
+  userDetails.style.display = 'none';
+  saveButton.style.display = 'none';
+  content.style.display = 'none';
+  initialButton.style.display = 'none';
+  // show the restart
   restartButton.style.visibility = 'visible';
-  highScoreList.style.visibility = 'hidden';
-  
+  // title of the page
   title.textContent = "High Scores Page"
-  
+  // get the information previously stored in local storage
   var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
- 
+  // sort the data in the variable in order from highest score to lowest
+  storedScores.sort((a, b) => b.Score - a.Score);
+ // create an unordered list to present the scores from the storedScores var
   var ul = document.createElement('ul');
-  
-  SectionHighScore.appendChild(ul);
-  
+  // add an id to style in css
+  ul.setAttribute('id', 'created-ul');
+  // append the unordered list to be a child of the sectionHighScore var
+  sectionHighScore.appendChild(ul);
+  // create a for loop to show the top five highest scores
   for(var i=0; i<5; i++){
+    // create a list item for each of the scores to be presented
     var li = document.createElement('li');
+    // create an id for teh list item to be styled in css
+    li.setAttribute('id', 'created-li');
+    // present the content from the storedScores variable into the created list
     li.innerHTML = `${storedScores[i].Initials} scored ${storedScores[i].Score} / ${storedScores[i].Count} in 30 seconds!`;
+    // append the list var as a child of the unordered list
     ul.appendChild(li);
-
   }
-  
+ // once the button is clicked, hide it, the only option is then the restart button
+  viewHighScores.style.visibility = 'hidden';
 });
 
+// restart button ==> seen in the 'viewHighScores' function, this will reload the page
 restartButton.addEventListener("click", function(event){
   event.preventDefault();
   location.reload(true);
