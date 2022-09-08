@@ -54,8 +54,6 @@ If you would like to see the your highscores, click the View High Scores button
 ![image](https://user-images.githubusercontent.com/110107834/189056653-89606db5-b6b6-4248-a0dd-6d304116477a.png)
 
 This will direct you to the following page, where you will be able to observe the top 5 high scores (based on correct answers)
-
+![image](https://user-images.githubusercontent.com/110107834/189058791-58a96a63-db06-4541-9e8b-d35f92a0c74d.png)
 
 To restart the quiz, just click the restart quiz button and you will be directed back to the first page, ready to start the quiz again!
-
-
