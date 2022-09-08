@@ -181,9 +181,10 @@ const questionsArray = [
 // this function runs when the 'initialButton' is run
 // randomQuestion picks a question from the array so that it can be presented to the user
 function randomQuestion(){
-  // hide the title and answer grid elements
+  // hide the title and answer grid elements and viewHighScores button
   title.style.visibility = 'hidden';
   answerGrid.style.visability = 'hidden';
+  viewHighScores.style.display = 'none';
   // show the button icons in the webpage
   buttonA.style.visibility = 'visible';
   buttonB.style.visibility = 'visible';
@@ -354,7 +355,7 @@ viewHighScores.addEventListener("click", function(event){
     ul.appendChild(li);
   }
  // once the button is clicked, hide it, the only option is then the restart button
-  viewHighScores.style.visibility = 'hidden';
+  viewHighScores.style.display = 'none';
 });
 
 // restart button ==> seen in the 'viewHighScores' function, this will reload the page
