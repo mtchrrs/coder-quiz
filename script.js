@@ -204,21 +204,25 @@ function randomQuestion(){
   content.textContent = thisQuestion.question;
   // create a variable which represents the correct answer, as found in the questions array
   var correctAnswer = thisQuestion.answer[4].ans;
-  console.log(correctAnswer);
+  //console.log(correctAnswer);
   // store the correct answer in local storage for later reference
   localStorage.setItem("correctAnswer", JSON.stringify(correctAnswer));
 };
 
-// create a global variable from correct answer (logged above) to reference in the buttons
-var rightButton = JSON.parse(localStorage.getItem("correctAnswer"));
+// create a global variable that will store the correct answer (logged above) to reference in the buttons
+var rightButton
 // create a variable for the questions attempted for a more accurate reading
 let count = 0
 
 // create a button and event listener for each multi-choice answer to record user selections
 buttonA.addEventListener("click", function(event){
   event.preventDefault();
+  // load the variable into the event listener to ensure that it is updated for each question
+  rightButton = JSON.parse(localStorage.getItem("correctAnswer"));
   // increases the questions attempted count (when button is clicked)
   count ++;
+  console.log(buttonA.textContent);
+  console.log(rightButton);
   // uses the variable with the correct answer and compares it to the buttons content
   if (buttonA.textContent == rightButton){
     // if the answer is correct, add 1 to correct
@@ -235,6 +239,7 @@ buttonA.addEventListener("click", function(event){
 
 buttonB.addEventListener("click", function(event){
  event.preventDefault();
+ rightButton = JSON.parse(localStorage.getItem("correctAnswer"));
  count ++;
   if (buttonB.textContent == rightButton){
     correctAns++;
@@ -247,6 +252,7 @@ buttonB.addEventListener("click", function(event){
 
 buttonC.addEventListener("click", function(event){
   event.preventDefault();
+  rightButton = JSON.parse(localStorage.getItem("correctAnswer"));
   count ++;
   if (buttonC.textContent == rightButton){
     correctAns++;
@@ -259,6 +265,7 @@ buttonC.addEventListener("click", function(event){
 
 buttonD.addEventListener("click", function(event){
   event.preventDefault();
+  rightButton = JSON.parse(localStorage.getItem("correctAnswer"));
   count ++;
   if (buttonD.textContent == rightButton){
     correctAns++;
