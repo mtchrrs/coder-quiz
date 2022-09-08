@@ -214,11 +214,6 @@ function randomQuestion(){
   buttonC.textContent = thisQuestion.answer[2].text3;
   buttonD.textContent = thisQuestion.answer[3].text4;
 
-  // buttonA.setAttribute("data-correct",thisQuestion.answer[0].correct);
-  // buttonA.setAttribute("data-correct",thisQuestion.answer[1].correct);
-  // buttonA.setAttribute("data-correct",thisQuestion.answer[2].correct);
-  // buttonA.setAttribute("data-correct",thisQuestion.answer[3].correct);
-  
   content.textContent = thisQuestion.question;
   var correctAnswer = thisQuestion.answer[4].ans;
 
@@ -308,19 +303,20 @@ function postQuizPage(event){
 };
 
 
-let arr = [];
+
 saveButton.addEventListener("click", function(event){
   event.preventDefault();
+  let arr = JSON.parse(localStorage.getItem("userHighScores")) || [];
   var userHighScores = {
     Initials: userDetails.value,
-    Score: correctAns, count,
+    Score: correctAns, //count,
   };
 
   arr.push(userHighScores)
   // once details are submitted
   // save data to local, run Highscores page
   localStorage.setItem("userHighScores", JSON.stringify(arr));
-  // location.reload(true);
+  location.reload(true);
 });
 
 // to get multiple stored scores, ie initials and scores, 
@@ -335,6 +331,8 @@ saveButton.addEventListener("click", function(event){
 // // viewighscores
 // // shown once game is finished
 // // shown by clicking View High Scores button
+var SectionHighScore = document.getElementById("section-highscore");
+
 viewHighScores.addEventListener("click", function(event){
   event.preventDefault
   buttonA.style.display = 'none';
@@ -347,29 +345,24 @@ viewHighScores.addEventListener("click", function(event){
   content.style.visibility = 'hidden';
   initialButton.style.visibility = 'hidden';
   restartButton.style.visibility = 'visible';
-  // shows top 5 scores
+  highScoreList.style.visibility = 'visible';
+  
   title.textContent = "High Scores Page"
-  // show initials and the score /10
-  var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
-  var scoreStorage = [{}, {}, {}, {}, {}]
-  scoreStorage.push(storedScores);
-  localStorage.setItem("scoreStorage", JSON.stringify(scoreStorage));
-
- var finalLog = JSON.parse(localStorage.getItem("scoreStorage"));
-
-  console.log(finalLog);
-
-  if (storedScores.Score === 0) {
-   answerGrid.style.display = 'none';
-  } else {
-   answerGrid.textContent = storedScores.Initials + " scored a total of " + storedScores.Score + " right in 30 seconds!";
-  }
-  // include start button
+  
+  var storedScores = localStorage.getItem("userHighScores");
  
-  if(storedScores.Initials == null){
-    alert("You must play the quiz to get a highscore!");
-    location.reload();
-  } 
+  // NEED ASSISTANCE
+  var ul = document.createElement('ul');
+  var li = document.createElement('li');
+  for(var i=0; i<5; i++){
+    SectionHighScore.appendChild(ul);
+    ul.appendChild(li);
+    if(Array.isArray(storedScores[i])){
+      li.innerHTML = storedScores[i];
+    }
+  };
+  console.log(SectionHighScore);
+ // NEED ASSISTANCE
 });
 
 restartButton.addEventListener("click", function(event){
@@ -377,4 +370,4 @@ restartButton.addEventListener("click", function(event){
   location.reload(true);
 });
 
-// shows last 5 scores
+
