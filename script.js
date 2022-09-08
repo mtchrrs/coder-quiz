@@ -75,105 +75,105 @@ function timerRun() {
 const questionsArray = [
     {
    //this shows the actual question to be asked
-   question: "1", 
+   question: "What is the easiest way to refence an element from HTML into JS?", 
    answer:[
     // these are the multi-choice options to pick from
-    {text1: "true"},
-    {text2: "b"},
-    {text3: "c"},
-    {text4: "d"},
+    {text1: '.getElementbyId()'},
+    {text2: '.findElement()'},
+    {text3: '.searchHTMLfor()'},
+    {text4: '.getIdByElement()'},
     // this is the correct answer that matches one of the multi-choice options
-    {ans: "true"},
+    {ans: '.getElementbyId()'},
    ]
  },
  {
-    question: "2", 
+    question: "The term 'var' refers to..", 
     answer:[
-     {text1: "a"},
-     {text2: "true"},
-     {text3: "c"},
-     {text4: "d"},
-     {ans: "true"},
+     {text1: 'an array'},
+     {text2: 'an object'},
+     {text3: 'a variable'},
+     {text4: 'an element'},
+     {ans: 'a variable'},
     ]
   },
   {
-    question: "3", 
+    question: "How would you call a function names 'callMe'?", 
     answer:[
-     {text1: "a"},
-     {text2: "b"},
-     {text3: "true"},
-     {text4: "d"},
-     {ans: "true"},
+     {text1: '.callfunction(callMe)'},
+     {text2: 'function callMe()'},
+     {text3: 'callMe()'},
+     {text4: 'fcn.callMe'},
+     {ans: 'callMe()'},
     ]
   },
   {
-    question: "4", 
+    question: "How do you add a single line comment in JavaScript?", 
     answer:[
-     {text1: "a"},
-     {text2: "b"},
-     {text3: "c"},
-     {text4: "true"},
-     {ans: "true"},
+     {text1: '"=> this is the comment <="'},
+     {text2: '"/* this is the comment */"'},
+     {text3: '"<!-- this is the comment -->"'},
+     {text4: '"// this is the comment"'},
+     {ans: '"// this is the comment"'},
     ]
   },
   {
-    question: "5", 
+    question: "Which of the following is a string?", 
     answer:[
-     {text1: "true"},
-     {text2: "b"},
-     {text3: "c"},
-     {text4: "d"},
-     {ans: "true"},
+     {text1: "'7'"},
+     {text2: '10'},
+     {text3: 'var string = 5'},
+     {text4: 'var object = {4, 5, 6}'},
+     {ans: "'7'"},
     ]
   },
   {
-    question: "6", 
+    question: "How to you make a variable react to a mouse 'click'?", 
     answer:[
-     {text1: "a"},
-     {text2: "true"},
-     {text3: "c"},
-     {text4: "d"},
-     {ans: "true"},
+     {text1: '.addEventListener(click)'},
+     {text2: '.addClickListener'},
+     {text3: '.listenFor(click)'},
+     {text4: '.click'},
+     {ans: '.addEventListener(click)'},
     ]
   },
   {
-    question: "7", 
+    question: "How would you create a variable?", 
     answer:[
-     {text1: "a"},
-     {text2: "b"},
-     {text3: "true"},
-     {text4: "d"},
-     {ans: "true"},
+     {text1: 'variable = myVariable;'},
+     {text2: 'vbl = myVariable;'},
+     {text3: 'var myVariable;'},
+     {text4: 'var = myVariable;'},
+     {ans: 'var myVariable;'},
     ]
   },
   {
-    question: "8", 
+    question: "How do you reference JavaScript in HTML?", 
     answer:[
-     {text1: "a"},
-     {text2: "b"},
-     {text3: "c"},
-     {text4: "true"},
-     {ans: "true"},
+     {text1: '<script>'},
+     {text2: '<javascript>'},
+     {text3: '<js>'},
+     {text4: '<readscript>'},
+     {ans: '<script>'},
     ]
   },
   {
-    question: "9", 
+    question: "How would you create a function in JavaScript?", 
     answer:[
-     {text1: "true"},
-     {text2: "b"},
-     {text3: "c"},
-     {text4: "d"},
-     {ans: "true"},
+     {text1: 'createFunction = myFunction()'},
+     {text2: 'myFunction()'},
+     {text3: 'fcn.myFunction()'},
+     {text4: 'function myFunction()'},
+     {ans: 'function myFunction()'},
     ]
   },
   {
-    question: "10", 
+    question: "How do you write an 'if' statement in JavaScript?", 
     answer:[
-     {text1: "a"},
-     {text2: "true"},
-     {text3: "c"},
-     {text4: "d"},
-     {ans: "true"},
+     {text1: 'if i == 8'},
+     {text2: 'if (i==8)'},
+     {text3: '.if(i=8)'},
+     {text4: '(i==8)if'},
+     {ans: 'if (i==8)'},
     ]
   },
 ];
@@ -194,6 +194,7 @@ function randomQuestion(){
   var questionIndex = Math.floor(Math.random() * questionsArray.length);
   // create a variable that identifies the question number from the array
   var thisQuestion = questionsArray[questionIndex];
+  console.log(thisQuestion);
   // present the multi-choice options from the question picked above 
   buttonA.textContent = thisQuestion.answer[0].text1;
   buttonB.textContent = thisQuestion.answer[1].text2;
@@ -203,6 +204,7 @@ function randomQuestion(){
   content.textContent = thisQuestion.question;
   // create a variable which represents the correct answer, as found in the questions array
   var correctAnswer = thisQuestion.answer[4].ans;
+  console.log(correctAnswer);
   // store the correct answer in local storage for later reference
   localStorage.setItem("correctAnswer", JSON.stringify(correctAnswer));
 };
