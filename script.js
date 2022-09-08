@@ -309,7 +309,8 @@ saveButton.addEventListener("click", function(event){
   let arr = JSON.parse(localStorage.getItem("userHighScores")) || [];
   var userHighScores = {
     Initials: userDetails.value,
-    Score: correctAns, //count,
+    Score: correctAns, 
+    //Count: count,
   };
 
   arr.push(userHighScores)
@@ -351,18 +352,20 @@ viewHighScores.addEventListener("click", function(event){
   
   var storedScores = JSON.parse(localStorage.getItem("userHighScores"));
  
-  answerGrid.textContent = storedScores;
+  //answerGrid.textContent = storedScores;
 
   // NEED ASSISTANCE
-  // var ul = document.createElement('ul');
-  // var li = document.createElement('li');
-  // for(var i=0; i<5; i++){
-  //   SectionHighScore.appendChild(ul);
-  //   ul.appendChild(li);
-  //   if(Array.isArray(storedScores[i])){
-  //     li.innerHTML = storedScores[i];
-  //   }
-  // };
+  var ul = document.createElement('ul');
+  var li = document.createElement('li');
+  SectionHighScore.appendChild(ul);
+  
+  for(var i=0; i<5; i++){
+    ul.appendChild(li);
+    li.innerHTML = `${storedScores[i].Initials} scored ${storedScores[i].Score} /  in 30 seconds!`;
+   //   if(Array.isArray(storedScores[i])){
+   //     li.innerHTML = storedScores[i];
+  }
+  
   // console.log(SectionHighScore);
  // NEED ASSISTANCE
 });
